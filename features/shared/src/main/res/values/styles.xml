@@ -1,0 +1,121 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <style name="Theme.Meli" parent="Theme.MaterialComponents.Light.NoActionBar">
+        <item name="colorPrimary">@color/meli_yellow</item>
+        <item name="colorAccent">@color/meli_blue</item>
+        <item name="android:textAppearance">@style/Theme.Meli.Text.Large</item>
+        <item name="android:colorBackground">@color/white</item>
+        <item name="android:statusBarColor">?attr/colorPrimary</item>
+        <item name="android:fontFamily">@font/proxima_nova_regular</item>
+    </style>
+
+    <style name="Theme.Meli.Toolbar" parent="@style/Widget.AppCompat.Toolbar">
+        <item name="android:layout_width">match_parent</item>
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:background">@color/meli_yellow</item>
+        <item name="colorControlNormal">@color/meli_blue</item>
+        <item name="android:elevation">@dimen/dimen_4</item>
+    </style>
+
+    <style name="Theme.Meli.Toolbar.Search" parent="@style/Widget.AppCompat.Toolbar">
+        <item name="android:layout_width">match_parent</item>
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:background">@color/white</item>
+        <item name="colorControlNormal">@color/meli_grey</item>
+        <item name="android:elevation">@dimen/dimen_4</item>
+    </style>
+
+    <style name="Theme.Meli.SearchView" parent="@style/Widget.AppCompat.SearchView">
+        <item name="android:layout_width">match_parent</item>
+        <item name="android:layout_height">match_parent</item>
+        <item name="android:iconifiedByDefault">false</item>
+        <item name="android:queryBackground">@android:color/transparent</item>
+        <item name="android:queryHint">@string/hint_search</item>
+        <item name="android:searchIcon">@null</item>
+    </style>
+
+    <style name="Theme.Meli.Toolbar.Home" parent="Theme.Meli.Toolbar">
+        <item name="android:paddingBottom">@dimen/dimen_16</item>
+    </style>
+
+    <style name="Theme.Meli.IconButton" parent="@style/Widget.AppCompat.ActionButton">
+        <item name="android:layout_width">wrap_content</item>
+        <item name="android:layout_height">wrap_content</item>
+    </style>
+
+    <style name="Theme.Meli.Search">
+        <item name="android:layout_width">@dimen/dimen_0</item>
+        <item name="android:layout_height">@dimen/dimen_36</item>
+        <item name="android:background">@drawable/shape_edit_text</item>
+        <item name="android:drawableLeft">@drawable/ic_search</item>
+        <item name="android:drawablePadding">@dimen/dimen_10</item>
+        <item name="android:hint">@string/hint_search</item>
+        <item name="android:paddingStart">@dimen/dimen_16</item>
+        <item name="android:paddingEnd">@dimen/dimen_16</item>
+        <item name="android:textColor">@color/meli_black</item>
+        <item name="android:textColorHint">@color/meli_grey_light</item>
+        <item name="android:textSize">@dimen/text_size_14</item>
+    </style>
+
+    <style name="Theme.Meli.Text">
+        <item name="android:layout_width">wrap_content</item>
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:textColor">@color/meli_black</item>
+        <item name="fontFamily">@font/proxima_nova_regular</item>
+    </style>
+
+    <style name="Theme.Meli.Text.Small" parent="Theme.Meli.Text">
+        <item name="android:textSize">@dimen/text_size_12</item>
+    </style>
+
+    <style name="Theme.Meli.Text.Medium" parent="Theme.Meli.Text">
+        <item name="android:textSize">@dimen/text_size_14</item>
+    </style>
+
+    <style name="Theme.Meli.Text.Normal" parent="Theme.Meli.Text">
+        <item name="android:textSize">@dimen/text_size_16</item>
+    </style>
+
+    <style name="Theme.Meli.Text.Large" parent="Theme.Meli.Text">
+        <item name="android:textSize">@dimen/text_size_18</item>
+    </style>
+
+    <style name="Theme.Meli.Text.ExtraLarge" parent="Theme.Meli.Text">
+        <item name="android:textSize">@dimen/text_size_20</item>
+    </style>
+
+    <style name="Theme.Meli.Text.ExtraExtraLarge" parent="Theme.Meli.Text">
+        <item name="android:textSize">@dimen/text_size_28</item>
+    </style>
+
+    <style name="Theme.Meli.Button" parent="Widget.MaterialComponents.Button.UnelevatedButton">
+        <item name="android:layout_width">match_parent</item>
+        <item name="android:layout_height">@dimen/dimen_48</item>
+        <item name="android:textAppearance">@style/TextAppearance.AppCompat.Medium</item>
+        <item name="android:layout_marginStart">@dimen/dimen_16</item>
+        <item name="android:layout_marginEnd">@dimen/dimen_16</item>
+        <item name="android:backgroundTint">@color/meli_blue</item>
+        <item name="android:insetTop">@dimen/dimen_0</item>
+        <item name="android:insetBottom">@dimen/dimen_0</item>
+        <item name="android:textColor">@color/white</item>
+        <item name="android:textSize">@dimen/text_size_14</item>
+        <item name="cornerRadius">@dimen/dimen_6</item>
+    </style>
+
+    <style name="Theme.Meli.Button.Secondary" parent="Theme.Meli.Button">
+        <item name="android:backgroundTint">@color/meli_blue_light</item>
+        <item name="android:textColor">@color/meli_blue</item>
+    </style>
+
+    <style name="Theme.Meli.Button.Text" parent="@style/Widget.MaterialComponents.Button.TextButton">
+        <item name="android:textColor">@color/meli_blue</item>
+        <item name="android:textSize">@dimen/text_size_18</item>
+        <item name="android:textAppearance">@style/TextAppearance.AppCompat.Medium</item>
+        <item name="android:layout_width">match_parent</item>
+        <item name="android:layout_marginStart">@dimen/dimen_16</item>
+        <item name="android:layout_marginEnd">@dimen/dimen_16</item>
+        <item name="android:layout_height">@dimen/dimen_48</item>
+    </style>
+
+</resources>

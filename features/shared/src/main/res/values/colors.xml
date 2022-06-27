@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <color name="meli_yellow">#FFD600</color>
+    <color name="meli_blue">#3483FA</color>
+    <color name="meli_blue_light">#E3EDFB</color>
+    <color name="meli_grey">#616161</color>
+    <color name="meli_grey_light">#ACACAC</color>
+    <color name="meli_grey_medium">#77DCDCDC</color>
+    <color name="meli_black">#333333</color>
+    <color name="meli_green">#00a650</color>
+
+    <color name="black">#FF000000</color>
+    <color name="white">#FFFFFFFF</color>
+</resources>
