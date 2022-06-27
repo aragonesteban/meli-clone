@@ -16,7 +16,7 @@ class ProductsViewModel @Inject constructor(
     private val productsUseCase: ProductsUseCase
 ) : ViewModel() {
 
-    private val _uiState = MutableStateFlow<ProductsUiState>(ProductsUiState.Loading)
+    private val _uiState = MutableStateFlow<ProductsUiState>(ProductsUiState.ShowInitialEmptyState)
     val uiState: StateFlow<ProductsUiState> = _uiState
 
     private var _productsList = listOf<ProductItem>()
@@ -26,8 +26,12 @@ class ProductsViewModel @Inject constructor(
         viewModelScope.launch {
             _uiState.value = when (val result = productsUseCase.getProductListByQuery(query)) {
                 is MeliResult.Success -> {
-                    _productsList = result.data
-                    ProductsUiState.ShowProductsList(result.data)
+                    if (result.data.isNotEmpty()) {
+                        _productsList = result.data
+                        ProductsUiState.ShowProductsList(result.data)
+                    } else {
+                        ProductsUiState.ShowEmptyStateProducts
+                    }
                 }
                 is MeliResult.Error -> ProductsUiState.Error
             }

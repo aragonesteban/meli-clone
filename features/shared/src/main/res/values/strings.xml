@@ -2,4 +2,10 @@
 <resources>
     <string name="hint_search">Buscar en Mercado Libre</string>
     <string name="label_error">Ha ocurrido un error. Por favor intente otra vez</string>
+    <string name="label_start_search_products">Comienza a buscar productos</string>
+    <string name="label_there_are_not_products">No encontramos publicaciones</string>
+    <string name="label_check_word_wrote_correctly">Revisa que la palabra esté bien escrita</string>
+    <string name="label_seems_there_is_not_internet">¡Parece que no hay internet!</string>
+    <string name="label_check_connection">Revisa tu conexión para seguir navegando</string>
+    <string name="btn_try_again">Reintentar</string>
 </resources>

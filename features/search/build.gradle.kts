@@ -18,6 +18,11 @@ android {
 
     buildFeatures {
         viewBinding = true
+        compose = true
+    }
+
+    composeOptions {
+        kotlinCompilerExtensionVersion = "1.2.0-rc02"
     }
 
     compileOptions {
@@ -34,16 +39,20 @@ dependencies {
     implementation(project(":domain"))
     implementation(project(":features:shared"))
     implementation(AndroidX.core.ktx)
+    implementation(AndroidX.activity.ktx)
     implementation(AndroidX.appCompat)
     implementation(AndroidX.constraintLayout)
     implementation(Google.android.material)
     implementation(AndroidX.Lifecycle.viewModelKtx)
     implementation(AndroidX.Lifecycle.runtimeKtx)
-    implementation(AndroidX.fragment.ktx)
-    implementation(COIL)
 
-    // Navigation Component
-    implementation(AndroidX.navigation.fragmentKtx)
+    // Compose
+    implementation(AndroidX.compose.compiler)
+    implementation(AndroidX.compose.runtime)
+    implementation(AndroidX.compose.foundation)
+    implementation(AndroidX.compose.foundation.layout)
+    implementation(AndroidX.compose.ui.tooling)
+    implementation(AndroidX.compose.material)
 
     // Hilt
     implementation(Google.dagger.hilt.android)

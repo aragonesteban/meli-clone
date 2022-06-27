@@ -48,10 +48,13 @@ dependencies {
     implementation(project(":data"))
     implementation(project(":domain"))
     implementation(project(":features:products"))
+    implementation(project(":features:search"))
     implementation(project(":features:shared"))
     implementation(AndroidX.core.ktx)
     implementation(AndroidX.appCompat)
     implementation(AndroidX.constraintLayout)
+
+    // Navigation Component
     implementation(AndroidX.navigation.fragmentKtx)
     implementation(AndroidX.navigation.uiKtx)
 
