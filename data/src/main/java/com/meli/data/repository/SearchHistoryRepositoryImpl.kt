@@ -27,4 +27,10 @@ class SearchHistoryRepositoryImpl @Inject constructor(
         }
     }
 
+    override suspend fun deleteSearchHistory() {
+        withContext(Dispatchers.IO) {
+            localSearchHistory.deleteSearchHistory()
+        }
+    }
+
 }

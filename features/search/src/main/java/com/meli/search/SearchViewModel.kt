@@ -38,4 +38,11 @@ class SearchViewModel @Inject constructor(
         }
     }
 
+    fun deleteSearchHistory() {
+        viewModelScope.launch {
+            searchHistoryUseCase.deleteSearchHistory()
+            _searchHistoryList = listOf()
+        }
+    }
+
 }

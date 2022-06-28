@@ -12,7 +12,7 @@
         <entry key="features/products/src/main/res/layout/item_product.xml" value="0.33" />
         <entry key="features/search/src/main/res/drawable/ic_clock.xml" value="0.1765" />
         <entry key="features/search/src/main/res/drawable/ic_north_west.xml" value="0.1765" />
-        <entry key="features/search/src/main/res/layout/activity_search.xml" value="0.22780797101449277" />
+        <entry key="features/search/src/main/res/layout/activity_search.xml" value="0.33" />
         <entry key="features/search/src/main/res/layout/fragment_search.xml" value="0.22780797101449277" />
         <entry key="features/shared/src/main/res/drawable/ic_arrow_forward.xml" value="0.2265" />
         <entry key="features/shared/src/main/res/drawable/ic_location.xml" value="0.1" />

@@ -18,4 +18,8 @@ class LocalSearchHistoryImpl @Inject constructor(
         return searchHistoryDao.getSearchHistory().map { item -> item.query }
     }
 
+    override fun deleteSearchHistory() {
+        searchHistoryDao.deleteSearchHistory()
+    }
+
 }

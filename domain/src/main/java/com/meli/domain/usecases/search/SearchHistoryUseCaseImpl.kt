@@ -14,12 +14,16 @@ class SearchHistoryUseCaseImpl @Inject constructor(
             queryItem.lowercase().contains(query.lowercase())
         }
         if (queryAlreadyExists.not()) {
-            searchHistoryRepository.saveSearchQueryHistory(query)
+            searchHistoryRepository.saveSearchQueryHistory(query.trim())
         }
     }
 
     override suspend fun getSearchHistory(): MeliResult<List<String>> {
         return searchHistoryRepository.getSearchHistory()
+    }
+
+    override suspend fun deleteSearchHistory() {
+        searchHistoryRepository.deleteSearchHistory()
     }
 
 }

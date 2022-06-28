@@ -15,11 +15,13 @@ import androidx.compose.foundation.lazy.items
 import androidx.compose.material.Icon
 import androidx.compose.material.MaterialTheme
 import androidx.compose.material.Text
+import androidx.compose.material.TextButton
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.res.colorResource
 import androidx.compose.ui.res.painterResource
+import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
 import androidx.lifecycle.Lifecycle
 import androidx.lifecycle.lifecycleScope
@@ -45,7 +47,7 @@ class SearchActivity : AppCompatActivity() {
         setContentView(binding.root)
 
         setUpToolbar()
-        setSearchViewListener()
+        setListeners()
         lifecycleScope.launch {
             repeatOnLifecycle(Lifecycle.State.STARTED) {
                 viewModel.getSearchHistory()
@@ -63,6 +65,14 @@ class SearchActivity : AppCompatActivity() {
         setSupportActionBar(binding.toolbarSearch)
         supportActionBar?.setDisplayHomeAsUpEnabled(true)
         supportActionBar?.setDisplayShowTitleEnabled(false)
+    }
+
+    private fun setListeners() {
+        setSearchViewListener()
+        binding.btnClearHistory.setOnClickListener {
+            viewModel.deleteSearchHistory()
+            setDataSearchHistory(listOf())
+        }
     }
 
     private fun setSearchViewListener() {
@@ -94,9 +104,10 @@ class SearchActivity : AppCompatActivity() {
     private fun setDataSearchHistory(searchHistory: List<String>) {
         binding.apply {
             loadingSearchHistory.toggleVisibility(show = false)
+            btnClearHistory.toggleVisibility(show = searchHistory.isNotEmpty())
             searchHistoryList.setContent {
                 MaterialTheme {
-                    LazyColumn(modifier = Modifier.padding(top = 8.dp)) {
+                    LazyColumn {
                         items(searchHistory) { query -> ItemSearchHistory(query) }
                     }
                 }

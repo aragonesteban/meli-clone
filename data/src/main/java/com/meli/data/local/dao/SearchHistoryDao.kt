@@ -14,4 +14,7 @@ interface SearchHistoryDao {
     @Query("SELECT * FROM search_history")
     fun getSearchHistory(): List<SearchHistory>
 
+    @Query("DELETE FROM search_history")
+    fun deleteSearchHistory()
+
 }

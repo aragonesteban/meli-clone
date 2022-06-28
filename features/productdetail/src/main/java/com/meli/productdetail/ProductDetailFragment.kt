@@ -4,10 +4,8 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import androidx.compose.foundation.layout.Column
-import androidx.compose.foundation.layout.Row
-import androidx.compose.foundation.layout.padding
-import androidx.compose.foundation.layout.size
+import android.widget.Space
+import androidx.compose.foundation.layout.*
 import androidx.compose.material.Icon
 import androidx.compose.material.MaterialTheme
 import androidx.compose.material.Text
@@ -20,6 +18,7 @@ import androidx.compose.ui.res.colorResource
 import androidx.compose.ui.text.font.Font
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.font.toFontFamily
+import androidx.compose.ui.text.style.TextOverflow
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.fragment.app.Fragment
@@ -148,21 +147,29 @@ class ProductDetailFragment : Fragment() {
             )
             TextAttribute(text = "${attribute.name}: ")
             TextAttribute(
+                modifier = Modifier.padding(end = 16.dp),
                 text = attribute.value ?: getString(R.string.label_no_apply),
-                fontWeight = FontWeight.Bold
+                fontWeight = FontWeight.Bold,
             )
         }
     }
 
     @Composable
-    fun TextAttribute(text: String, fontWeight: FontWeight = FontWeight.Normal) {
+    fun TextAttribute(
+        modifier: Modifier = Modifier,
+        text: String,
+        fontWeight: FontWeight = FontWeight.Normal,
+    ) {
         Text(
             text = text,
             style = MaterialTheme.typography.body2,
             fontWeight = fontWeight,
             color = colorResource(id = com.meli.shared.R.color.meli_black),
             fontSize = 12.sp,
-            fontFamily = Font(com.meli.shared.R.font.proxima_nova_regular).toFontFamily()
+            fontFamily = Font(com.meli.shared.R.font.proxima_nova_regular).toFontFamily(),
+            maxLines = 1,
+            overflow = TextOverflow.Ellipsis,
+            modifier = modifier
         )
     }
 
