@@ -6,10 +6,13 @@ import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.ListAdapter
 import com.meli.domain.model.products.ProductItem
 import com.meli.products.databinding.ItemProductBinding
+import com.meli.shared.extensions.basicDiffUtil
 
 class ProductsListAdapter(
     private val onItemClickProduct: (String) -> Unit
-) : ListAdapter<ProductItem, ProductsListViewHolder>(ProductItemDiffCallback()) {
+) : ListAdapter<ProductItem, ProductsListViewHolder>(
+    basicDiffUtil { old, new -> old.id == new.id }
+) {
 
     fun setProductsList(value: List<ProductItem>) {
         submitList(value)
@@ -25,18 +28,6 @@ class ProductsListAdapter(
     override fun onBindViewHolder(holder: ProductsListViewHolder, position: Int) {
         val item = getItem(position)
         holder.bind(item, onItemClickProduct)
-    }
-
-}
-
-private class ProductItemDiffCallback : DiffUtil.ItemCallback<ProductItem>() {
-
-    override fun areItemsTheSame(oldItem: ProductItem, newItem: ProductItem): Boolean {
-        return oldItem.id == newItem.id
-    }
-
-    override fun areContentsTheSame(oldItem: ProductItem, newItem: ProductItem): Boolean {
-        return oldItem == newItem
     }
 
 }

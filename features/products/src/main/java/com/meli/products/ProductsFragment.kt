@@ -9,11 +9,14 @@ import android.view.ViewGroup
 import androidx.activity.result.ActivityResult
 import androidx.activity.result.ActivityResultLauncher
 import androidx.activity.result.contract.ActivityResultContracts
+import androidx.core.net.toUri
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.Lifecycle
 import androidx.lifecycle.lifecycleScope
 import androidx.lifecycle.repeatOnLifecycle
+import androidx.navigation.NavDeepLinkRequest
+import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.meli.domain.model.products.ProductItem
 import com.meli.products.adapter.ProductsListAdapter
@@ -131,7 +134,10 @@ class ProductsFragment : Fragment() {
     }
 
     private fun goToProductDetail(productId: String) {
-
+        val request = NavDeepLinkRequest.Builder
+            .fromUri("meli-app://com.meli.app/product_detail_fragment/$productId".toUri())
+            .build()
+        findNavController().navigate(request)
     }
 
     private fun goToSearch() {

@@ -32,7 +32,7 @@ fun ProductDetailApi.transformToProductDetail(): ProductDetail {
         attributes = attributes?.map { attribute ->
             ProductAttribute(
                 name = attribute.name ?: String(),
-                value = attribute.valueName ?: String()
+                value = attribute.valueName
             )
         } ?: listOf(),
         warranty = warranty ?: String(),

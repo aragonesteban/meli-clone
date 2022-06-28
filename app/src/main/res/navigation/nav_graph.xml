@@ -11,4 +11,16 @@
         android:label="Products"
         tools:layout="@layout/fragment_products" />
 
+    <fragment
+        android:id="@+id/product_detail_fragment"
+        android:name="com.meli.productdetail.ProductDetailFragment"
+        android:label="ProductDetail"
+        tools:layout="@layout/fragment_product_detail">
+        <argument
+            android:name="productId"
+            android:defaultValue="0"
+            app:argType="string" />
+        <deepLink app:uri="meli-app://com.meli.app/product_detail_fragment/{productId}" />
+    </fragment>
+
 </navigation>

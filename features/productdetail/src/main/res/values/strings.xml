@@ -1,0 +1,9 @@
+<resources>
+    <string name="btn_buy_now">Comprar ahora</string>
+    <string name="btn_add_cart">Agregar al carrito</string>
+    <string name="label_sold_quantity">%d vendidos</string>
+    <string name="label_stock_available">Stock disponible %d</string>
+    <string name="label_product">Producto</string>
+    <string name="label_no_apply">N/A</string>
+    <string name="label_attributes_product">Características del producto</string>
+</resources>

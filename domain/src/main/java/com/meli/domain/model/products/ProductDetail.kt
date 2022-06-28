@@ -13,5 +13,5 @@ data class ProductDetail(
 
 data class ProductAttribute(
     val name: String,
-    val value: String,
+    val value: String? = null,
 )
