@@ -11,7 +11,7 @@ class SearchHistoryUseCaseImpl @Inject constructor(
 
     override suspend fun saveSearchQueryHistory(searchHistoryList: List<String>, query: String) {
         val queryAlreadyExists = searchHistoryList.any { queryItem ->
-            queryItem.lowercase().contains(query.lowercase())
+            queryItem.lowercase().trim().contains(query.lowercase().trim())
         }
         if (queryAlreadyExists.not()) {
             searchHistoryRepository.saveSearchQueryHistory(query.trim())

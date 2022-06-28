@@ -23,6 +23,7 @@
         android:id="@+id/content_product_detail"
         android:layout_width="match_parent"
         android:layout_height="@dimen/dimen_0"
+        android:visibility="gone"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
