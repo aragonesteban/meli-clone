@@ -1,24 +1,34 @@
 package com.meli.products
 
+import android.app.Activity
+import android.content.Intent
 import android.os.Bundle
-import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.Toast
+import androidx.activity.result.ActivityResult
+import androidx.activity.result.ActivityResultLauncher
+import androidx.activity.result.contract.ActivityResultContracts
+import androidx.core.net.toUri
+import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.Lifecycle
 import androidx.lifecycle.lifecycleScope
 import androidx.lifecycle.repeatOnLifecycle
+import androidx.navigation.NavDeepLinkRequest
+import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.meli.domain.model.products.ProductItem
 import com.meli.products.adapter.ProductsListAdapter
 import com.meli.products.databinding.FragmentProductsBinding
+import com.meli.shared.SEARCH_QUERY_KEY
+import com.meli.shared.extensions.isOnline
 import com.meli.shared.extensions.showToastMessage
 import com.meli.shared.extensions.toggleVisibility
+import com.meli.shared.navigation.goToSearch
 import dagger.hilt.android.AndroidEntryPoint
-import kotlinx.coroutines.flow.collect
 import kotlinx.coroutines.launch
+import com.meli.shared.R as SharedResource
 
 @AndroidEntryPoint
 class ProductsFragment : Fragment() {
@@ -31,6 +41,8 @@ class ProductsFragment : Fragment() {
     private val productsListAdapter = ProductsListAdapter { productId ->
         goToProductDetail(productId)
     }
+
+    private var resultSearchActivity: ActivityResultLauncher<Intent>? = null
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -45,12 +57,12 @@ class ProductsFragment : Fragment() {
 
         handleClickListeners()
         setUpRecycler()
+        onResultSearchActivity()
         lifecycleScope.launch {
             viewLifecycleOwner.repeatOnLifecycle(Lifecycle.State.STARTED) {
                 viewModel.uiState.collect(::handleViewState)
             }
         }
-        viewModel.getProductListByQuery("tabla")
     }
 
     private fun handleClickListeners() {
@@ -74,33 +86,110 @@ class ProductsFragment : Fragment() {
 
     private fun handleViewState(uiState: ProductsUiState) {
         when (uiState) {
-            ProductsUiState.Loading -> binding.loadingProducts.toggleVisibility(show = true)
+            ProductsUiState.Loading -> toggleLoading()
+            ProductsUiState.ShowInitialEmptyState -> showInitialEmptyState()
             is ProductsUiState.ShowProductsList -> setDataPostsList(uiState.data)
+            ProductsUiState.ShowEmptyStateProducts -> showEmptyStateProducts()
+            ProductsUiState.ErrorInternetConnection -> showErrorInternetConnection()
             ProductsUiState.Error -> showErrorFeedback()
         }
     }
 
-
-    private fun setDataPostsList(value: List<ProductItem>) {
-        binding.loadingProducts.toggleVisibility(show = false)
-        productsListAdapter.setProductsList(value)
+    private fun toggleLoading() {
+        binding.apply {
+            loadingProducts.toggleVisibility(show = true)
+            emptyState.toggleVisibility(show = false)
+            productList.toggleVisibility(show = false)
+        }
     }
 
+    private fun showInitialEmptyState() {
+        binding.apply {
+            loadingProducts.toggleVisibility(show = false)
+            emptyState.apply {
+                toggleVisibility(show = true)
+                setCustomImage(R.drawable.ic_search_meli)
+                setCustomTitle(getString(R.string.label_start_search_products))
+            }
+        }
+    }
+
+    private fun setDataPostsList(value: List<ProductItem>) {
+        binding.apply {
+            productsListAdapter.setProductsList(value)
+            loadingProducts.toggleVisibility(show = false)
+            emptyState.toggleVisibility(show = false)
+            productList.toggleVisibility(show = true)
+        }
+    }
+
+    private fun showEmptyStateProducts() {
+        binding.apply {
+            productList.toggleVisibility(show = false)
+            loadingProducts.toggleVisibility(show = false)
+            emptyState.apply {
+                toggleVisibility(show = true)
+                setCustomImage(R.drawable.ic_search_meli)
+                setCustomTitle(getString(R.string.label_there_are_not_products))
+                setCustomDescription(getString(R.string.label_check_word_wrote_correctly))
+            }
+        }
+    }
 
     private fun goToProductDetail(productId: String) {
-
+        val request = NavDeepLinkRequest.Builder
+            .fromUri("meli-app://com.meli.app/product_detail_fragment/$productId".toUri())
+            .build()
+        findNavController().navigate(request)
     }
 
     private fun goToSearch() {
-
+        resultSearchActivity?.launch(Intent().goToSearch(requireContext()))
     }
 
     private fun showErrorFeedback() {
-        requireContext().showToastMessage(getString(com.meli.shared.R.string.label_error))
+        requireContext().showToastMessage(getString(SharedResource.string.label_error))
+    }
+
+    private fun onResultSearchActivity() {
+        resultSearchActivity =
+            registerForActivityResult(ActivityResultContracts.StartActivityForResult()) { result: ActivityResult ->
+                if (result.resultCode == Activity.RESULT_OK) {
+                    val query = result.data?.getStringExtra(SEARCH_QUERY_KEY) ?: String()
+                    binding.apply {
+                        emptyState.toggleVisibility(show = false)
+                        searchProducts.setText(query)
+                    }
+                    viewModel.getProductListByQuery(
+                        query = query,
+                        isOnline = requireContext().isOnline()
+                    )
+                }
+            }
+    }
+
+    private fun showErrorInternetConnection() {
+        binding.apply {
+            productList.toggleVisibility(show = false)
+            loadingProducts.toggleVisibility(show = false)
+            emptyState.apply {
+                toggleVisibility(show = true)
+                setCustomImage(SharedResource.drawable.ic_satellite)
+                setCustomTitle(getString(SharedResource.string.label_seems_there_is_not_internet))
+                setCustomDescription(getString(SharedResource.string.label_check_connection))
+                setCustomButtonClick {
+                    viewModel.getProductListByQuery(
+                        query = binding.searchProducts.text.toString(),
+                        isOnline = requireContext().isOnline()
+                    )
+                }
+            }
+        }
     }
 
     override fun onDestroyView() {
         super.onDestroyView()
         _binding = null
+        resultSearchActivity = null
     }
 }

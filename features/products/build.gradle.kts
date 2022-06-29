@@ -16,16 +16,6 @@ android {
         consumerProguardFiles("consumer-rules.pro")
     }
 
-    buildTypes {
-        release {
-            isMinifyEnabled = false
-            proguardFiles(
-                getDefaultProguardFile("proguard-android-optimize.txt"),
-                "proguard-rules.pro"
-            )
-        }
-    }
-
     buildFeatures {
         viewBinding = true
     }
@@ -52,7 +42,16 @@ dependencies {
     implementation(AndroidX.fragment.ktx)
     implementation(COIL)
 
+    // Navigation Component
+    implementation(AndroidX.navigation.fragmentKtx)
+
     // Hilt
     implementation(Google.dagger.hilt.android)
     kapt(Google.dagger.hilt.compiler)
+
+    // Tests
+    testImplementation(Testing.junit4)
+    testImplementation(Testing.Mockito.kotlin)
+    testImplementation(Kotlin.test.testng)
+    testImplementation(KotlinX.coroutines.test)
 }

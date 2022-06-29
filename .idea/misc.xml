@@ -4,13 +4,24 @@
     <option name="filePathToZoomLevelMap">
       <map>
         <entry key="app/src/main/res/layout/activity_main.xml" value="0.3070652173913043" />
+        <entry key="features/productdetail/src/main/res/layout/activity_product_detail.xml" value="0.1889564336372847" />
+        <entry key="features/productdetail/src/main/res/layout/fragment_product_detail.xml" value="0.1889564336372847" />
+        <entry key="features/productdetail/src/main/res/layout/item_product_picture.xml" value="0.1884498480243161" />
+        <entry key="features/productdetail/src/main/res/menu/menu_product.xml" value="0.38153846153846155" />
         <entry key="features/products/src/main/res/layout/fragment_products.xml" value="0.25" />
         <entry key="features/products/src/main/res/layout/item_product.xml" value="0.33" />
+        <entry key="features/search/src/main/res/drawable/ic_clock.xml" value="0.1765" />
+        <entry key="features/search/src/main/res/drawable/ic_north_west.xml" value="0.1765" />
+        <entry key="features/search/src/main/res/layout/activity_search.xml" value="0.33" />
+        <entry key="features/search/src/main/res/layout/fragment_search.xml" value="0.22780797101449277" />
         <entry key="features/shared/src/main/res/drawable/ic_arrow_forward.xml" value="0.2265" />
         <entry key="features/shared/src/main/res/drawable/ic_location.xml" value="0.1" />
+        <entry key="features/shared/src/main/res/drawable/ic_satellite.xml" value="0.1785" />
         <entry key="features/shared/src/main/res/drawable/ic_search.xml" value="0.1665" />
+        <entry key="features/shared/src/main/res/drawable/ic_search_meli.xml" value="0.1765" />
         <entry key="features/shared/src/main/res/drawable/shape_edit_text.xml" value="0.1665" />
         <entry key="features/shared/src/main/res/font/fonts.xml" value="0.2824074074074074" />
+        <entry key="features/shared/src/main/res/layout/custom_view_empty_state.xml" value="0.22780797101449277" />
       </map>
     </option>
   </component>

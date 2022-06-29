@@ -1,6 +1,7 @@
 package com.meli.data.repository
 
 import com.meli.domain.repository.ProductsRepository
+import com.meli.domain.repository.SearchHistoryRepository
 import dagger.Binds
 import dagger.Module
 import dagger.hilt.InstallIn
@@ -16,5 +17,11 @@ abstract class RepositoryModule {
     abstract fun bindProductsRepository(
         productsRepositoryImpl: ProductsRepositoryImpl
     ): ProductsRepository
+
+    @Binds
+    @Singleton
+    abstract fun bindSearchHistoryRepository(
+        searchHistoryRepositoryImpl: SearchHistoryRepositoryImpl
+    ): SearchHistoryRepository
 
 }

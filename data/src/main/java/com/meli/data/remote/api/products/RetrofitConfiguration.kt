@@ -1,6 +1,5 @@
 package com.meli.data.remote.api.products
 
-import com.itkacher.okprofiler.BuildConfig
 import com.jakewharton.retrofit2.converter.kotlinx.serialization.asConverterFactory
 import com.localebro.okhttpprofiler.OkHttpProfilerInterceptor
 import com.meli.domain.MeliResult

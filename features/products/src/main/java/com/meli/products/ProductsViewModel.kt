@@ -16,18 +16,23 @@ class ProductsViewModel @Inject constructor(
     private val productsUseCase: ProductsUseCase
 ) : ViewModel() {
 
-    private val _uiState = MutableStateFlow<ProductsUiState>(ProductsUiState.Loading)
+    private val _uiState = MutableStateFlow<ProductsUiState>(ProductsUiState.ShowInitialEmptyState)
     val uiState: StateFlow<ProductsUiState> = _uiState
 
-    private var _productsList = listOf<ProductItem>()
-
-    fun getProductListByQuery(query: String) {
+    fun getProductListByQuery(isOnline: Boolean, query: String) {
         _uiState.value = ProductsUiState.Loading
+        if (isOnline.not()) {
+            _uiState.value = ProductsUiState.ErrorInternetConnection
+            return
+        }
         viewModelScope.launch {
             _uiState.value = when (val result = productsUseCase.getProductListByQuery(query)) {
                 is MeliResult.Success -> {
-                    _productsList = result.data
-                    ProductsUiState.ShowProductsList(result.data)
+                    if (result.data.isNotEmpty()) {
+                        ProductsUiState.ShowProductsList(result.data)
+                    } else {
+                        ProductsUiState.ShowEmptyStateProducts
+                    }
                 }
                 is MeliResult.Error -> ProductsUiState.Error
             }

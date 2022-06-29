@@ -62,4 +62,17 @@ dependencies {
     implementation(AndroidX.room.runtime)
     annotationProcessor(AndroidX.room.compiler)
     kapt(AndroidX.room.compiler)
+
+    // Test
+    testImplementation(Testing.junit4)
+    testImplementation(Testing.Mockito.kotlin)
+    testImplementation(Kotlin.test.testng)
+    testImplementation(KotlinX.coroutines.test)
+    testImplementation(AndroidX.room.testing)
+    androidTestImplementation(AndroidX.test.ext.junit)
+    androidTestImplementation(Kotlin.test.testng)
+    androidTestImplementation(AndroidX.test.espresso.core)
+    androidTestImplementation(AndroidX.test.rules)
+    androidTestImplementation(AndroidX.test.runner)
+    androidTestImplementation(AndroidX.test.coreKtx)
 }

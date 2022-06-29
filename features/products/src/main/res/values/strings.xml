@@ -1,7 +1,9 @@
 <resources>
     <string name="label_open_menu">Abrir menu</string>
-    <string name="label_open_shopping_car">Abrir Carrito de Compras</string>
     <string name="label_example_location">Enviar a Esteban Aragon – Carrera 79 #19–88</string>
     <string name="label_coming_soon">Próximamente</string>
     <string name="label_in">en</string>
+    <string name="label_start_search_products">Comienza a buscar productos</string>
+    <string name="label_there_are_not_products">No encontramos publicaciones</string>
+    <string name="label_check_word_wrote_correctly">Revisa que la palabra esté bien escrita</string>
 </resources>
