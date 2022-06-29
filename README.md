@@ -37,7 +37,8 @@ This architecture containts three main layers:
 
 <div style="display: grid; grid-template-columns: 50% 50%;">
 <img src="https://user-images.githubusercontent.com/24237865/77502018-f7d36000-6e9c-11ea-92b0-1097240c8689.png" />
-
+<br />
+<br />
 <img alt="Screen Shot 2022-06-29 at 10 23 31 AM" src="https://user-images.githubusercontent.com/93212523/176474644-a2fb49ef-05cd-4a5a-8c6a-8e7199f6ded4.png">
 </div>
 
