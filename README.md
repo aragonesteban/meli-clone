@@ -35,10 +35,10 @@ This architecture containts three main layers:
 - **domain**: In this module lives everything about bussines logic working with use cases, also is the responsible to get data from data module to send it to the view.
 - **features**: In this module lives all presentation
 
-<div style="display: flex">
-<img width="500" src="https://user-images.githubusercontent.com/24237865/77502018-f7d36000-6e9c-11ea-92b0-1097240c8689.png" />
+<div style="display: grid; grid-template-columns: 50% 50%;">
+<img src="https://user-images.githubusercontent.com/24237865/77502018-f7d36000-6e9c-11ea-92b0-1097240c8689.png" />
 
-<img width="500" alt="Screen Shot 2022-06-29 at 10 23 31 AM" src="https://user-images.githubusercontent.com/93212523/176474644-a2fb49ef-05cd-4a5a-8c6a-8e7199f6ded4.png">
+<img alt="Screen Shot 2022-06-29 at 10 23 31 AM" src="https://user-images.githubusercontent.com/93212523/176474644-a2fb49ef-05cd-4a5a-8c6a-8e7199f6ded4.png">
 </div>
 
 <br />
