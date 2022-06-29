@@ -36,9 +36,9 @@ This architecture containts three main layers:
 - **features**: In this module lives all presentation
 
 <div style="display: flex">
-<img width="400" src="https://user-images.githubusercontent.com/24237865/77502018-f7d36000-6e9c-11ea-92b0-1097240c8689.png" />
+<img width="500" src="https://user-images.githubusercontent.com/24237865/77502018-f7d36000-6e9c-11ea-92b0-1097240c8689.png" />
 
-<img width="500" align="right" alt="Screen Shot 2022-06-29 at 10 23 31 AM" src="https://user-images.githubusercontent.com/93212523/176474644-a2fb49ef-05cd-4a5a-8c6a-8e7199f6ded4.png">
+<img width="500" alt="Screen Shot 2022-06-29 at 10 23 31 AM" src="https://user-images.githubusercontent.com/93212523/176474644-a2fb49ef-05cd-4a5a-8c6a-8e7199f6ded4.png">
 </div>
 
 <br />
