@@ -40,4 +40,10 @@ dependencies {
     // Hilt
     implementation(Google.dagger.hilt.android)
     kapt(Google.dagger.hilt.compiler)
+
+    // Test
+    testImplementation(Testing.junit4)
+    testImplementation(Testing.Mockito.kotlin)
+    testImplementation(Kotlin.test.testng)
+    testImplementation(KotlinX.coroutines.test)
 }
