@@ -4,8 +4,10 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.Space
-import androidx.compose.foundation.layout.*
+import androidx.compose.foundation.layout.Column
+import androidx.compose.foundation.layout.Row
+import androidx.compose.foundation.layout.padding
+import androidx.compose.foundation.layout.size
 import androidx.compose.material.Icon
 import androidx.compose.material.MaterialTheme
 import androidx.compose.material.Text
@@ -36,6 +38,7 @@ import com.meli.domain.model.products.ProductDetail
 import com.meli.productdetail.databinding.FragmentProductDetailBinding
 import com.meli.shared.PRODUCT_ID_KEY
 import com.meli.shared.extensions.formatToCurrency
+import com.meli.shared.extensions.isOnline
 import com.meli.shared.extensions.showToastMessage
 import com.meli.shared.extensions.toggleVisibility
 import dagger.hilt.android.AndroidEntryPoint
@@ -63,7 +66,7 @@ class ProductDetailFragment : Fragment() {
         val productId = arguments?.getString(PRODUCT_ID_KEY) ?: String()
 
         setUpToolbar()
-        viewModel.getProductDetailById(productId)
+        viewModel.getProductDetailById(requireContext().isOnline(), productId)
         lifecycleScope.launch {
             viewLifecycleOwner.repeatOnLifecycle(Lifecycle.State.STARTED) {
                 viewModel.uiState.collect(::handleViewState)
@@ -83,6 +86,7 @@ class ProductDetailFragment : Fragment() {
         when (uiState) {
             ProductDetailUiState.Loading -> binding.loadingProductDetail.toggleVisibility(show = true)
             is ProductDetailUiState.ShowProductDetail -> setDateProductDetail(uiState.data)
+            ProductDetailUiState.ErrorInternetConnection -> showErrorInternetConnection()
             ProductDetailUiState.Error -> showErrorFeedback()
         }
     }
@@ -90,6 +94,7 @@ class ProductDetailFragment : Fragment() {
     private fun setDateProductDetail(productDetail: ProductDetail) {
         binding.apply {
             loadingProductDetail.toggleVisibility(show = false)
+            emptyState.toggleVisibility(show = false)
             contentProductDetail.toggleVisibility(show = true)
             soldQuantityProductDetail.text =
                 getString(R.string.label_sold_quantity, productDetail.soldQuantity)
@@ -175,6 +180,22 @@ class ProductDetailFragment : Fragment() {
 
     private fun showErrorFeedback() {
         requireContext().showToastMessage(getString(com.meli.shared.R.string.label_error))
+    }
+
+    private fun showErrorInternetConnection() {
+        binding.apply {
+            contentProductDetail.toggleVisibility(show = false)
+            loadingProductDetail.toggleVisibility(show = false)
+            emptyState.apply {
+                toggleVisibility(show = true)
+                setCustomImage(com.meli.shared.R.drawable.ic_satellite)
+                setCustomTitle(getString(com.meli.shared.R.string.label_seems_there_is_not_internet))
+                setCustomDescription(getString(com.meli.shared.R.string.label_check_connection))
+                setCustomButtonClick {
+                    viewModel.getProductDetailById(requireContext().isOnline())
+                }
+            }
+        }
     }
 
     override fun onDestroyView() {

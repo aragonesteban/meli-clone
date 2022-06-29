@@ -7,5 +7,6 @@ sealed interface ProductsUiState {
     object ShowInitialEmptyState : ProductsUiState
     data class ShowProductsList(val data: List<ProductItem>) : ProductsUiState
     object ShowEmptyStateProducts : ProductsUiState
+    object ErrorInternetConnection : ProductsUiState
     object Error : ProductsUiState
 }

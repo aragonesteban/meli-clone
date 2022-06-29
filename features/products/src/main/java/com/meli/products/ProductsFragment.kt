@@ -22,6 +22,7 @@ import com.meli.domain.model.products.ProductItem
 import com.meli.products.adapter.ProductsListAdapter
 import com.meli.products.databinding.FragmentProductsBinding
 import com.meli.shared.SEARCH_QUERY_KEY
+import com.meli.shared.extensions.isOnline
 import com.meli.shared.extensions.showToastMessage
 import com.meli.shared.extensions.toggleVisibility
 import com.meli.shared.navigation.goToSearch
@@ -89,6 +90,7 @@ class ProductsFragment : Fragment() {
             ProductsUiState.ShowInitialEmptyState -> showInitialEmptyState()
             is ProductsUiState.ShowProductsList -> setDataPostsList(uiState.data)
             ProductsUiState.ShowEmptyStateProducts -> showEmptyStateProducts()
+            ProductsUiState.ErrorInternetConnection -> showErrorInternetConnection()
             ProductsUiState.Error -> showErrorFeedback()
         }
     }
@@ -106,8 +108,8 @@ class ProductsFragment : Fragment() {
             loadingProducts.toggleVisibility(show = false)
             emptyState.apply {
                 toggleVisibility(show = true)
-                setCustomImage(SharedResource.drawable.ic_search_meli)
-                setCustomTitle(getString(SharedResource.string.label_start_search_products))
+                setCustomImage(R.drawable.ic_search_meli)
+                setCustomTitle(getString(R.string.label_start_search_products))
             }
         }
     }
@@ -116,6 +118,7 @@ class ProductsFragment : Fragment() {
         binding.apply {
             productsListAdapter.setProductsList(value)
             loadingProducts.toggleVisibility(show = false)
+            emptyState.toggleVisibility(show = false)
             productList.toggleVisibility(show = true)
         }
     }
@@ -126,9 +129,9 @@ class ProductsFragment : Fragment() {
             loadingProducts.toggleVisibility(show = false)
             emptyState.apply {
                 toggleVisibility(show = true)
-                setCustomImage(SharedResource.drawable.ic_search_meli)
-                setCustomTitle(getString(SharedResource.string.label_there_are_not_products))
-                setCustomDescription(getString(SharedResource.string.label_check_word_wrote_correctly))
+                setCustomImage(R.drawable.ic_search_meli)
+                setCustomTitle(getString(R.string.label_there_are_not_products))
+                setCustomDescription(getString(R.string.label_check_word_wrote_correctly))
             }
         }
     }
@@ -157,9 +160,31 @@ class ProductsFragment : Fragment() {
                         emptyState.toggleVisibility(show = false)
                         searchProducts.setText(query)
                     }
-                    viewModel.getProductListByQuery(query = query)
+                    viewModel.getProductListByQuery(
+                        query = query,
+                        isOnline = requireContext().isOnline()
+                    )
                 }
             }
+    }
+
+    private fun showErrorInternetConnection() {
+        binding.apply {
+            productList.toggleVisibility(show = false)
+            loadingProducts.toggleVisibility(show = false)
+            emptyState.apply {
+                toggleVisibility(show = true)
+                setCustomImage(SharedResource.drawable.ic_satellite)
+                setCustomTitle(getString(SharedResource.string.label_seems_there_is_not_internet))
+                setCustomDescription(getString(SharedResource.string.label_check_connection))
+                setCustomButtonClick {
+                    viewModel.getProductListByQuery(
+                        query = binding.searchProducts.text.toString(),
+                        isOnline = requireContext().isOnline()
+                    )
+                }
+            }
+        }
     }
 
     override fun onDestroyView() {

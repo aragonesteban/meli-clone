@@ -16,6 +16,7 @@
         <entry key="features/search/src/main/res/layout/fragment_search.xml" value="0.22780797101449277" />
         <entry key="features/shared/src/main/res/drawable/ic_arrow_forward.xml" value="0.2265" />
         <entry key="features/shared/src/main/res/drawable/ic_location.xml" value="0.1" />
+        <entry key="features/shared/src/main/res/drawable/ic_satellite.xml" value="0.1785" />
         <entry key="features/shared/src/main/res/drawable/ic_search.xml" value="0.1665" />
         <entry key="features/shared/src/main/res/drawable/ic_search_meli.xml" value="0.1765" />
         <entry key="features/shared/src/main/res/drawable/shape_edit_text.xml" value="0.1665" />

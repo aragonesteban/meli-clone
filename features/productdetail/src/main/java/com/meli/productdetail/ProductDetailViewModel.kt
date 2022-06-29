@@ -18,9 +18,17 @@ class ProductDetailViewModel @Inject constructor(
     private val _uiState = MutableStateFlow<ProductDetailUiState>(ProductDetailUiState.Loading)
     val uiState: StateFlow<ProductDetailUiState> = _uiState
 
-    fun getProductDetailById(productId: String) {
+    private var _productId = String()
+
+    fun getProductDetailById(isOnline: Boolean, productId: String? = null) {
+        _productId = productId ?: _productId
+        _uiState.value = ProductDetailUiState.Loading
+        if (isOnline.not()) {
+            _uiState.value = ProductDetailUiState.ErrorInternetConnection
+            return
+        }
         viewModelScope.launch {
-            _uiState.value = when (val result = productsUseCase.getProductById(productId)) {
+            _uiState.value = when (val result = productsUseCase.getProductById(_productId)) {
                 is MeliResult.Success -> ProductDetailUiState.ShowProductDetail(result.data)
                 is MeliResult.Error -> ProductDetailUiState.Error
             }
