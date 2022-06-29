@@ -50,7 +50,6 @@ dependencies {
     implementation(Square.retrofit2.retrofit)
     implementation(Square.okHttp3.okHttp)
     implementation(Square.okHttp3.loggingInterceptor)
-    implementation("com.localebro:okhttpprofiler:1.0.8")
 
     // Kotlin Serialization
     implementation(JakeWharton.retrofit2.converter.kotlinxSerialization)
