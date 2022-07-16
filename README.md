@@ -4,7 +4,10 @@
 🛒 Mercado Libre App Clone using modern Android development with Hilt, Coroutines, Jetpack (Room, ViewModel), and Jetpack Compose based on MVVM architecture.
 </p>
 
-<img src="/previews/preview.gif" align="right" width="32%"/>
+<p align="center">
+  <img src="/previews/preview.gif"/>
+</p>
+
 
 ## Tech stack
 - Minimum SDK level 21
